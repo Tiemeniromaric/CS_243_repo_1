@@ -43,7 +43,7 @@ function AppContent() {
         textAlign: 'center',
         padding: '20px',
         backgroundColor: '#f8f9fa',
-        borderTop: '2px solid #dee2e6',
+        borderTop: '1px solid #dee2e6',
         marginTop: 'auto'
       }}>
         © Romaric Tiem.
