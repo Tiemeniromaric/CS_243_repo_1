@@ -46,7 +46,7 @@ function AppContent() {
         borderTop: '1px solid #dee2e6',
         marginTop: 'auto'
       }}>
-        © Rome Tiemeni.
+        © Romaric Tiem.
       </footer>
     </div>
   );
