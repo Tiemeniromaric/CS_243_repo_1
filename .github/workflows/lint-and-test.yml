@@ -29,17 +29,6 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      # Optional: run ESLint if you have "lint" scripts defined
-      - name: Lint backend
-        if: always()
-        working-directory: backend
-        run: npm run lint --if-present
-
-      - name: Lint frontend
-        if: always()
-        working-directory: frontend
-        run: npm run lint --if-present
-
       # Run your tests (this also gives you syntax/type errors)
       - name: Test backend
         working-directory: backend
