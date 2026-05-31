@@ -1,0 +1,51 @@
+name: Lint and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm install
+
+      # Optional: run ESLint if you have "lint" scripts defined
+      - name: Lint backend
+        if: always()
+        working-directory: backend
+        run: npm run lint --if-present
+
+      - name: Lint frontend
+        if: always()
+        working-directory: frontend
+        run: npm run lint --if-present
+
+      # Run your tests (this also gives you syntax/type errors)
+      - name: Test backend
+        working-directory: backend
+        run: npm test
+
+      - name: Test frontend
+        working-directory: frontend
+        run: npm test
