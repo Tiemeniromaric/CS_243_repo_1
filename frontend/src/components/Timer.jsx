@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+mport { useState, useEffect } from 'react';
 import axios from 'axios';
+
 
 function Timer() {
   const [projects, setProjects] = useState([]);
@@ -11,6 +12,7 @@ function Timer() {
   const [isRunning, setIsRunning] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
 
+
   const getAuthToken = () => {
     const token = localStorage.getItem('token');
     if (!token || token === 'undefined' || token === 'null') {
@@ -20,12 +22,14 @@ function Timer() {
     return token;
   };
 
+
   useEffect(() => {
     const token = getAuthToken();
     if (!token) return;
     axios.get('http://localhost:5000/projects', { headers: { Authorization: `Bearer ${token}` } })
       .then(res => setProjects(res.data));
   }, []);
+
 
   useEffect(() => {
     return () => {
@@ -34,6 +38,7 @@ function Timer() {
       }
     };
   }, [intervalId]);
+
 
   const startTimer = () => {
     const now = new Date();
@@ -45,6 +50,7 @@ function Timer() {
     setIntervalId(id);
   };
 
+
   const stopTimer = () => {
     setIsRunning(false);
     setEndTime(new Date());
@@ -54,6 +60,7 @@ function Timer() {
     }
   };
 
+
   const continueTimer = () => {
     if (!startTime) return;
     setIsRunning(true);
@@ -61,6 +68,7 @@ function Timer() {
     const id = setInterval(() => setElapsed(prev => prev + 1), 1000);
     setIntervalId(id);
   };
+
 
   const restartTimer = () => {
     const now = new Date();
@@ -72,6 +80,7 @@ function Timer() {
     const id = setInterval(() => setElapsed(prev => prev + 1), 1000);
     setIntervalId(id);
   };
+
 
   const submitLog = async () => {
     if (!selectedProject || elapsed === 0) {
@@ -106,6 +115,7 @@ function Timer() {
     }
   };
 
+
   return (
     <div style={{ maxWidth: '600px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: '#f9f9f9' }}>
       <h2>Timer</h2>
@@ -125,5 +135,6 @@ function Timer() {
     </div>
   );
 }
+
 
 export default Timer;
